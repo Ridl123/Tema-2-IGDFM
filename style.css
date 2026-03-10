@@ -1,160 +1,111 @@
 /* 
-   TEMA 2 - CSS Zen Garden
-   In acest fisier am incercat sa aplic cateva principii de design:
-   contrast, repetitie, aliniere, proximitate si simplitate
+    TEMA 2 - CSS Zen Garden
+    Acest fișier implementează principiile fundamentale de design grafic:
+    CONTRAST, REPETIȚIE, ALINIERE, PROXIMITATE și SIMPLITATE.
 */
 
-/* aici am pus cateva variabile ca sa fie mai usor de schimbat culorile si fontul */
+/* 1. TIPOGRAFIE ȘI CULOARE (Variabile pentru consistență) */
 :root {
-  --primary-color: #2c3e50; /* culoarea principala pentru text */
-  --accent-color: #e74c3c; /* culoare de accent pentru titluri si linkuri */
-  --bg-color: #f4f7f6; /* culoarea de fundal a paginii */
+  --primary-color: #2c3e50; /* Contrast ridicat pentru textul de bază */
+  --accent-color: #e74c3c; /* Culoare de accent pentru ierarhie vizuală */
+  --bg-color: #f4f7f6; /* Simplitate: fundal neutru */
   --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* setari generale pentru toata pagina */
+/* 2. SIMPLITATE: Setări generale pentru lizibilitate */
 body {
   font-family: var(--font-main);
-  line-height: 1.6; /* face textul mai usor de citit */
+  line-height: 1.6; /* Proporție optimă pentru citit */
   color: var(--primary-color);
   background-color: var(--bg-color);
   margin: 0;
   padding: 0;
 }
 
-/* containerul principal al paginii */
+/* 3. ALINIERE: Centrarea layout-ului și structură Flexbox */
 .page-wrapper {
-  max-width: 1000px; /* limita de latime ca sa nu se intinda prea mult continutul */
-  margin: 0 auto; /* centreaza continutul pe mijloc */
+  max-width: 1000px; /* Limită pentru a evita rândurile prea lungi */
+  margin: 0 auto; /* Aliniere centrală pe desktop */
   padding: 20px;
   display: flex;
-  flex-wrap: wrap; /* permite trecerea pe rand nou daca nu mai este loc */
+  flex-wrap: wrap; /* Responsive: permite elementelor să se așeze sub ele */
 }
 
-/* stil pentru titlul principal */
+/* 4. CONTRAST: Crearea unui punct focal puternic în Header */
 header h1 {
   font-size: 3rem;
-  text-transform: uppercase; /* litere mari pentru mai mult impact vizual */
+  text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--accent-color);
-  border-bottom: 4px solid var(--accent-color); /* linie sub titlu pentru evidentiere */
+  border-bottom: 4px solid var(--accent-color);
+  margin-bottom: 0; /* Proximitate față de h2 */
 }
 
-/* spatiu intre zonele importante din pagina */
+header h2 {
+  font-weight: 300;
+  font-style: italic;
+  margin-top: 5px; /* Aliniere optică sub titlu */
+}
+
+/* 5. PROXIMITATE: Gruparea vizuală a secțiunilor */
 section,
 .main,
 .sidebar {
-  margin-bottom: 40px;
+  margin-bottom: 50px; /* Spațiu alb generos între grupuri de idei */
 }
 
-/* partea de intro ocupa toata latimea */
+/* Intro ocupă toată lățimea pentru impact */
 .intro {
   flex: 1 1 100%;
 }
 
-/* zona principala a continutului */
 .main {
   flex: 3;
   padding-right: 30px;
 }
 
-/* bara laterala */
 .sidebar {
   flex: 1;
   background: #fff;
-  padding: 20px;
-  border-radius: 8px; /* colturi rotunjite pentru un aspect mai placut */
+  padding: 25px;
+  border-radius: 8px; /* Simplitate: forme geometrice curate */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* toate titlurile de nivel 3 au acelasi stil */
+/* 6. REPETIȚIE: Elemente vizuale constante pentru unitate */
 h3 {
   color: var(--accent-color);
   text-decoration: underline;
+  margin-bottom: 10px; /* Proximitate față de paragraful următor */
 }
 
-/* stil pentru elementele din lista de selectii */
+p {
+  margin-top: 0; /* Întărește relația cu titlul de deasupra */
+  margin-bottom: 1.5em;
+}
+
 .design-selection li {
-  list-style: none; /* elimin bulinele implicite */
-  margin-bottom: 10px;
-  border-left: 3px solid var(--accent-color); /* linie decorativa in stanga */
-  padding-left: 10px;
+  list-style: none;
+  margin-bottom: 15px;
+  border-left: 3px solid var(--accent-color); /* Repetiție a culorii de accent */
+  padding-left: 12px;
 }
 
-/* stil general pentru linkuri */
+/* 7. ANIMAȚIE: Micro-interacțiuni pentru feedback */
 a {
-  transition: all 0.3s ease; /* tranzitie pentru hover */
+  transition: all 0.3s ease; /* Tranziție lină */
   color: var(--primary-color);
   text-decoration: none;
+  position: relative;
 }
 
-/* efect la hover pe linkuri */
-a:hover {
+a:hover,
+a:focus {
   color: var(--accent-color);
-  padding-left: 5px; /* mica deplasare ca sa para mai interactiv */
+  outline: none;
 }
 
-/* partea responsive pentru ecrane mai mici */
-@media (max-width: 768px) {
-  .page-wrapper {
-    flex-direction: column; /* pune elementele unul sub altul */
-  }
-
-  .main,
-  .sidebar {
-    flex: 1 1 100%;
-    padding-right: 0;
-  }
-
-  header h1 {
-    font-size: 2rem; /* titlul devine mai mic pe mobil */
-  }
-}
-
-/* aici am folosit un pseudo-element pentru un decor in spatele headerului */
-header[role="banner"]::before {
-  content: "";
-  display: block;
-  width: 100px;
-  height: 100px;
-  background: var(--accent-color);
-  opacity: 0.1; /* l-am facut transparent ca sa nu deranjeze */
-  position: absolute;
-  z-index: -1;
-  border-radius: 50%; /* forma cerc */
-  transform: translate(-20px, -20px);
-}
-
-/* acest div extra este folosit ca forma decorativa in fundal */
-.extra1 {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, transparent 70%, #d1d8e0 70%);
-  z-index: -2;
-}
-
-/* animatie simpla pentru aparitia elementelor */
-@keyframes fadeInSlide {
-  from {
-    opacity: 0;
-    transform: translateY(20px); /* porneste putin mai jos */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* aplic animatia pe principalele zone din pagina */
-.intro,
-.main,
-.sidebar {
-  animation: fadeInSlide 0.8s ease-out forwards;
-}
-
-/* aici fac un efect de linie care apare sub link */
+/* Efect vizual repetat pentru link-urile din liste */
 .design-selection a::after {
   content: "";
   display: block;
@@ -164,23 +115,86 @@ header[role="banner"]::before {
   transition: width 0.3s;
 }
 
-/* la hover, linia se extinde */
 .design-selection a:hover::after {
   width: 100%;
 }
 
-/* stil pentru linkurile din footer */
+/* 8. RESPONSIVE DESIGN (Desktop & Mobile) */
+@media (max-width: 768px) {
+  .page-wrapper {
+    flex-direction: column; /* Aliniere verticală pe ecrane mici */
+  }
+
+  .main,
+  .sidebar {
+    flex: 1 1 100%;
+    padding-right: 0;
+  }
+
+  header h1 {
+    font-size: 2.2rem; /* Adaptarea contrastului de mărime */
+  }
+}
+
+/* 9. DECOR (Pseudo-elemente conform cerinței CSS Zen Garden) */
+header[role="banner"]::before {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 80px;
+  background: var(--accent-color);
+  opacity: 0.1;
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-15px, -15px);
+}
+
+.extra1 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, transparent 75%, #d1d8e0 75%);
+  z-index: -2;
+}
+
+/* Animație Keyframes pentru apariția fluidă a conținutului */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro,
+.main,
+.sidebar {
+  animation: fadeInSlide 0.8s ease-out forwards;
+}
+
+/* 10. FOOTER: Aliniere și simplitate finală */
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 30px 0;
+}
+
 footer a {
   display: inline-block;
-  padding: 10px 20px;
-  margin-right: 10px;
+  padding: 8px 18px;
+  margin: 5px;
   border: 2px solid var(--primary-color);
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
-/* efect de hover pentru footer */
 footer a:hover {
   background: var(--primary-color);
   color: #fff;
