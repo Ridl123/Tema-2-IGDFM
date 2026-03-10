@@ -1,0 +1,187 @@
+/* 
+   TEMA 2 - CSS Zen Garden
+   In acest fisier am incercat sa aplic cateva principii de design:
+   contrast, repetitie, aliniere, proximitate si simplitate
+*/
+
+/* aici am pus cateva variabile ca sa fie mai usor de schimbat culorile si fontul */
+:root {
+  --primary-color: #2c3e50; /* culoarea principala pentru text */
+  --accent-color: #e74c3c; /* culoare de accent pentru titluri si linkuri */
+  --bg-color: #f4f7f6; /* culoarea de fundal a paginii */
+  --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* setari generale pentru toata pagina */
+body {
+  font-family: var(--font-main);
+  line-height: 1.6; /* face textul mai usor de citit */
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* containerul principal al paginii */
+.page-wrapper {
+  max-width: 1000px; /* limita de latime ca sa nu se intinda prea mult continutul */
+  margin: 0 auto; /* centreaza continutul pe mijloc */
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap; /* permite trecerea pe rand nou daca nu mai este loc */
+}
+
+/* stil pentru titlul principal */
+header h1 {
+  font-size: 3rem;
+  text-transform: uppercase; /* litere mari pentru mai mult impact vizual */
+  letter-spacing: 2px;
+  color: var(--accent-color);
+  border-bottom: 4px solid var(--accent-color); /* linie sub titlu pentru evidentiere */
+}
+
+/* spatiu intre zonele importante din pagina */
+section,
+.main,
+.sidebar {
+  margin-bottom: 40px;
+}
+
+/* partea de intro ocupa toata latimea */
+.intro {
+  flex: 1 1 100%;
+}
+
+/* zona principala a continutului */
+.main {
+  flex: 3;
+  padding-right: 30px;
+}
+
+/* bara laterala */
+.sidebar {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px; /* colturi rotunjite pentru un aspect mai placut */
+}
+
+/* toate titlurile de nivel 3 au acelasi stil */
+h3 {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* stil pentru elementele din lista de selectii */
+.design-selection li {
+  list-style: none; /* elimin bulinele implicite */
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-color); /* linie decorativa in stanga */
+  padding-left: 10px;
+}
+
+/* stil general pentru linkuri */
+a {
+  transition: all 0.3s ease; /* tranzitie pentru hover */
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* efect la hover pe linkuri */
+a:hover {
+  color: var(--accent-color);
+  padding-left: 5px; /* mica deplasare ca sa para mai interactiv */
+}
+
+/* partea responsive pentru ecrane mai mici */
+@media (max-width: 768px) {
+  .page-wrapper {
+    flex-direction: column; /* pune elementele unul sub altul */
+  }
+
+  .main,
+  .sidebar {
+    flex: 1 1 100%;
+    padding-right: 0;
+  }
+
+  header h1 {
+    font-size: 2rem; /* titlul devine mai mic pe mobil */
+  }
+}
+
+/* aici am folosit un pseudo-element pentru un decor in spatele headerului */
+header[role="banner"]::before {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: var(--accent-color);
+  opacity: 0.1; /* l-am facut transparent ca sa nu deranjeze */
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%; /* forma cerc */
+  transform: translate(-20px, -20px);
+}
+
+/* acest div extra este folosit ca forma decorativa in fundal */
+.extra1 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, transparent 70%, #d1d8e0 70%);
+  z-index: -2;
+}
+
+/* animatie simpla pentru aparitia elementelor */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* porneste putin mai jos */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* aplic animatia pe principalele zone din pagina */
+.intro,
+.main,
+.sidebar {
+  animation: fadeInSlide 0.8s ease-out forwards;
+}
+
+/* aici fac un efect de linie care apare sub link */
+.design-selection a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s;
+}
+
+/* la hover, linia se extinde */
+.design-selection a:hover::after {
+  width: 100%;
+}
+
+/* stil pentru linkurile din footer */
+footer a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: 2px solid var(--primary-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* efect de hover pentru footer */
+footer a:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
